@@ -1,0 +1,40 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div id="app">
+    <p>{{message}}</p>
+    <input v-model="message" placeholder="输入你想输入的东西..."/>
+    <p :title="hint">鼠标悬停此处，看见提示信息</p>
+    <p v-if="seen">now you see me</p>
+    <ol>
+        <li v-for="todo in todos">
+            {{todo.text}}
+        </li>
+    </ol>
+    <button v-on:click="reverseMessage">逆转消息</button>
+    <todo-item></todo-item>
+</div>
+<script>
+    //需放在new vue()之前
+    Vue.component('todo-item',{
+        template:'<li>这是一个代办项模版</li>'
+    })
+    let app = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello fist snap',
+            hint: '页面加载于' + new Date().toLocaleString(),
+            seen: true,
+            todos:[
+                {text:'vue 1'},
+                {text:'vue 2'},
+                {text:'vue 3'},
+            ]
+        },
+        methods:{
+            reverseMessage(){
+                this.message=this.message.split(' ').reverse().join(' ')
+            }
+        }
+    })
+
+
+</script>
